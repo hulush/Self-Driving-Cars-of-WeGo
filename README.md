@@ -1,19 +1,19 @@
 # Self-Driving-Cars-of-WeGo
 Deep Learning/Machine Learning for Self Driving Cars. We all know self-driving cars is one of the hottest areas of research and business for the tech giants.
 
-I. Deep Learning for Autonomous Driving
+Deep Learning for Autonomous Driving
 
 Outline:
 
-• Autonomous Driving 
+I. Autonomous Driving 
 
 	-Modules: perception, planning	and control 
 	
-• Deep	Learning 
+II. Deep Learning 
 
 	-Application in	computer vision 
 	
-• Deep	learning for Autonomous	Driving
+III. Deep learning for Autonomous Driving
 
 	 - Sensor calibration/registration 
 	 - Sensor fusion 
