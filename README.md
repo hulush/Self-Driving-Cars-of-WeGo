@@ -7,7 +7,7 @@ Outline:
 
 • Autonomous Driving 
 
-	-Modules: perception, planning	and	control 
+	-Modules: perception, planning	and control 
 	
 • Deep	Learning 
 
@@ -17,9 +17,9 @@ Outline:
 
 	 - Sensor calibration/registration 
 	 - Sensor fusion 
-	 - Obstacle detection and	recognition 
-	 - Traffic sign/light detection and	recognition 
-	 - Road lane/marking detection	and	recognition 
+	 - Obstacle detection and recognition 
+	 - Traffic sign/light detection and recognition 
+	 - Road lane/marking detection and recognition 
 	 - Scene segmentation 
 	 - Object tracking 
 	 - Driver behavior model 
