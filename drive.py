@@ -28,34 +28,28 @@ speed_limit = MAX_SPEED
 
 @sio.on('telemetry')
 def telemetry(sid, data):
-    if data:
-        # The current steering angle of the car
+    if data:     
         steering_angle = float(data["steering_angle"])
-        # The current throttle of the car
+      
         throttle = float(data["throttle"])
-        # The current speed of the car
+        
         speed = float(data["speed"])
-        # The current image from the center camera of the car
+       
         image = Image.open(BytesIO(base64.b64decode(data["image"])))
-        # save frame
+       
         if args.image_folder != '':
             timestamp = datetime.utcnow().strftime('%Y_%m_%d_%H_%M_%S_%f')[:-3]
             image_filename = os.path.join(args.image_folder, timestamp)
             image.save('{}.jpg'.format(image_filename))
             
         try:
-            image = np.asarray(image)       # from PIL image to numpy array
-            image = utils.preprocess(image) # apply the preprocessing
-            image = np.array([image])       # the model expects 4D array
-
-            # predict the steering angle for the image
-            steering_angle = float(model.predict(image, batch_size=1))
-            # lower the throttle as the speed increases
-            # if the speed is above the current speed limit, we are on a downhill.
-            # make sure we slow down first and then go back to the original max speed.
+            image = np.asarray(image)      
+            image = utils.preprocess(image)
+            image = np.array([image])            
+            steering_angle = float(model.predict(image, batch_size=1))   
             global speed_limit
             if speed > speed_limit:
-                speed_limit = MIN_SPEED  # slow down
+                speed_limit = MIN_SPEED  
             else:
                 speed_limit = MAX_SPEED
             throttle = 1.0 - steering_angle**2 - (speed/speed_limit)**2
@@ -63,13 +57,9 @@ def telemetry(sid, data):
             print('{} {} {}'.format(steering_angle, throttle, speed))
             send_control(steering_angle, throttle)
         except Exception as e:
-            print(e)
-        
-    else:
-        # NOTE: DON'T EDIT THIS.
+            print(e)       
+    else:        
         sio.emit('manual', data={}, skip_sid=True)
-
-
 @sio.on('connect')
 def connect(sid, environ):
     print("connect ", sid)
@@ -115,8 +105,8 @@ if __name__ == '__main__':
     else:
         print("NOT RECORDING THIS RUN ...")
 
-    # wrap Flask application with engineio's middleware
+   
     app = socketio.Middleware(sio, app)
 
-    # deploy as an eventlet WSGI server
+   
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
